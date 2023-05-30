@@ -1,0 +1,76 @@
+syntax="proto3";
+option csharp_namespace="Proto.ServerMediator";
+
+import "Utility.proto";
+import "google/protobuf/any.proto";
+import "google/protobuf/timestamp.proto";
+
+package db_utility;
+
+enum Table {
+	MONITORING_BUILDING=0;
+	MONITORING_ROOM=1;
+	MONITORING_TRANSFORMER=2;
+	MONITORING_SENSOR=3;
+	MONITORING_SENSOR_TRANSFORMER=4;
+	EXPERT_DOCUMENTATION=5;
+	EXPERT_TRANSFORMER=6;
+	EXPERT_ELEMENT=7;
+	EXPERT_PARAMETER=8;
+	EXPERT_DEFECT=9;
+	EXPERT_ELEMENT_DOCUMENTATION=10;
+	EXPERT_DEFECT_DOCUMENTATION=11;
+	DIAGNOSTICS_TRANSFORMER=12;
+	DIAGNOSTICS_ELEMENT=13;
+	DIAGNOSTICS_DEFECT=14;
+	DIAGNOSTICS_TRANSFORMER_ELEMENT=15;
+	DIAGNOSTICS_TRANSFORMER_ELEMENT_DEFECT=16;
+}
+
+enum Field {
+  ID=0;
+  NAME=1;
+  DESCRIPTION=2;
+  STATUS=3;
+  STATE_SCORE=4;
+  NEXT_MAINTENANCE=5;
+  IS_FUNCTIONING=6;
+  IS_MONITORED=7;
+}
+
+message Empty {
+  
+}
+
+message SelectRequest {
+  Table select_from=1;
+  Field select_by=2;
+  optional int64 integer=3;
+  optional bytes bytes=4;
+  optional string str=5;
+  optional google.protobuf.Timestamp timestamp=6;
+  optional bool boolean=7;
+}
+message SelectReply {
+  utility.InformationReply information=1;
+  repeated google.protobuf.Any entry=2;
+}
+
+message InsertRequest {
+  Table insert_to=1;
+  repeated google.protobuf.Any entry=2;
+}
+
+message UpdateRequest {
+  Table update_in=1;
+  google.protobuf.Any entry=2;
+}
+
+message DeleteRequest {
+  Table delete_from=1;
+  Field delete_by=2;
+  optional int64 integer=3;
+  optional bytes bytes=4;
+  optional string str=5;
+  optional google.protobuf.Timestamp timestamp=6;
+}

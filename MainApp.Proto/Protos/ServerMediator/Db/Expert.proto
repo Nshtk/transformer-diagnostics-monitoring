@@ -1,0 +1,70 @@
+syntax="proto3";
+
+import "Utility.proto";
+import "ServerMediator/DbUtility.proto";
+
+option csharp_namespace="Proto.ServerMediator.Db.Expert";
+package expert;
+
+enum Table {
+  PLAYER=0;
+  PLAYERINFO=1;
+  PLAYERBLOCKLIST=2;
+  PLAYER_SECURITYQUESTION=3;
+  SECURITYQUESTION=4;
+}
+
+enum Field {
+  ID=0;
+  LOGIN=1;
+  PASSWORD=2;
+  REGISTRATION_DATE=3;
+  LOGIN_TIMESTAMP=4;
+  LOGIN_LAST_DATETIME=5;
+  BLOCK_DATETIME_BEGIN=6;
+  BLOCK_DATETIME_END=7;
+  SECURITY_ANSWER=8;
+  QUESTION=9;
+}
+
+message Documentation {
+	int64 id=1;
+	string name=2;
+}
+message Transformer {
+	int64 id=1;
+	Documentation documentation=2;
+	string name=3;
+}
+message Element {
+	string id=1;
+	string name=2;
+	string description=3;
+}
+message Parameter {
+	int64 id=1;
+	Element element=2;
+	string name=3;
+	string description=4;
+}
+message Defect {
+	string id=1;
+	string name=2;
+	string description=3;
+}
+message Element_Documentation {
+	Documentation documentation=1;
+	Element element=2;
+}
+message Defect_Documentation {
+	string id=1;
+	Documentation documentation=2;
+	string recomendation=3;
+}
+
+service DbExpert {
+	rpc selectFromDatabase(db_utility.SelectRequest) returns(db_utility.SelectReply);
+	rpc insertToDatabase(db_utility.InsertRequest) returns(utility.InformationReply);
+	rpc updateInDatabase(db_utility.UpdateRequest) returns(utility.InformationReply);
+	rpc deleteFromDatabase(db_utility.DeleteRequest) returns(utility.InformationReply);
+}

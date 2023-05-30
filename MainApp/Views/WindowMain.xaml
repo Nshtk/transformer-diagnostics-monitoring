@@ -1,0 +1,60 @@
+﻿<Window x:Class="MainApp.Views.ViewMainWindow"
+		xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:Local="clr-namespace:MainApp.ViewModels"
+		mc:Ignorable="d"
+		Title="Система мониторинга и диагностики" Height="720" Width="1280"
+		Background="WhiteSmoke">
+	
+	<Grid>
+		<!--TODO status bar and toolbar?-->
+		<!--TODO Current date and time-->
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition/>
+		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition/>
+		</Grid.ColumnDefinitions>
+		
+		<Menu Grid.Row="0" Height="25" VerticalAlignment="Top" Background="White">
+			<MenuItem Header="Файл">
+				<MenuItem Header="Загрузить трансформатор" ItemsSource="{Binding Transformers}">
+					<MenuItem.ItemContainerStyle>
+						<Style TargetType="MenuItem">
+							<Setter Property="Command" Value="{Binding DataContext.CommandLoadTransformer, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"/>
+							<Setter Property="CommandParameter" Value="{Binding}" />
+							<Setter Property="IsCheckable" Value="True"/>
+							<Setter Property="IsChecked" Value="{Binding IsLoaded, Mode=OneWay}"/>
+						</Style>
+					</MenuItem.ItemContainerStyle>
+					<MenuItem.ItemTemplate>
+						<DataTemplate>
+							<TextBlock Text="{Binding Path=Documentation.Name}"/>
+						</DataTemplate>
+					</MenuItem.ItemTemplate>
+				</MenuItem>
+				<MenuItem Header="Загрузить документ" Command="{Binding CommandOpenDocument}" />
+				<Separator/>
+				<MenuItem Header="Выход"/>
+			</MenuItem>
+			<MenuItem Header="Редактировать">
+				<MenuItem Header="Провести оффлайн диагностику" Command="{Binding CommandDiagnoseOffline}">
+
+				</MenuItem>
+			</MenuItem>
+			<MenuItem Header="Вид">
+				
+			</MenuItem>
+		</Menu>
+		<TabControl Grid.Row="1" ItemsSource="{Binding Tabs}" SelectedIndex="0" ItemContainerStyle="{StaticResource TabItem}">
+			<TabControl.ItemTemplate>
+				<DataTemplate>
+					<TextBlock Text="{Binding Title}"/>
+				</DataTemplate>
+			</TabControl.ItemTemplate>
+		</TabControl>
+	</Grid>
+</Window>

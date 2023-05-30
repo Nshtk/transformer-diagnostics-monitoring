@@ -1,0 +1,94 @@
+syntax="proto3";
+option csharp_namespace="Proto.Monitoring";
+
+import "Utility.proto";
+
+package monitoring;
+
+message ParameterValueData {
+	int32 date=1;
+	double value=2;
+}
+
+message GetParametersRequest {
+	uint32 id=1;
+}
+message GetParametersReply {
+	utility.InformationReply information=1;
+	double oil_concentration_h2=2;
+	double oil_concentration_ch4=3;
+	double oil_concentration_c2h2=4;
+	double oil_concentration_c2h4=5;
+	double oil_concentration_c2h6=6;
+	double oil_concentration_co=7;
+	double oil_concentration_co2=8;
+	double oil_acid_number=9;
+	double windings_humidity=10;
+	double insulation_furan_concentration=11;
+	int32 insulation_temperature=12;
+	int32 bushings_electrical_loss_tangent=13;
+	int32 hvr_break_voltage=14;
+	int32 magnetic_core_idle_loss=15;
+	double magnetic_core_partial_discharges=16;
+	int32 magnetic_core_vibration=17;
+	int32 cooling_system_efficiency=18;
+	double common_life_time=19;
+	int32 common_temperature=20;
+}
+
+message getParameterValuesPastReply {
+	utility.InformationReply information=1;
+	repeated ParameterValueData values_past_oil_concentration_h2=2;
+	repeated ParameterValueData values_past_oil_concentration_ch4=3;
+	repeated ParameterValueData values_past_oil_concentration_c2h2=4;
+	repeated ParameterValueData values_past_oil_concentration_c2h4=5;
+	repeated ParameterValueData values_past_oil_concentration_c2h6=6;
+	repeated ParameterValueData values_past_oil_concentration_co=7;
+	repeated ParameterValueData values_past_oil_concentration_co2=8;
+	repeated ParameterValueData values_past_oil_acid_number=9;
+	repeated ParameterValueData values_past_windings_humidity=10;
+	repeated ParameterValueData values_past_insulation_furan_concentration=11;
+	repeated ParameterValueData values_past_insulation_temperature=12;
+	repeated ParameterValueData values_past_bushings_electrical_loss_tangent=13;
+	repeated ParameterValueData values_past_hvr_break_voltage=14;
+	repeated ParameterValueData values_past_magnetic_core_idle_loss=15;
+	repeated ParameterValueData values_past_magnetic_core_partial_discharges=16;
+	repeated ParameterValueData values_past_magnetic_core_vibration=17;
+	repeated ParameterValueData values_past_cooling_system_efficiency=18;
+	repeated ParameterValueData values_past_common_life_time=19;
+	repeated ParameterValueData values_past_common_temperature=20;
+}
+
+message SendEditedParametersRequest {
+	uint32 id=1;
+	double oil_concentration_h2=2;
+	double oil_concentration_ch4=3;
+	double oil_concentration_c2h2=4;
+	double oil_concentration_c2h4=5;
+	double oil_concentration_c2h6=6;
+	double oil_concentration_co=7;
+	double oil_concentration_co2=8;
+	double oil_acid_number=9;
+	double windings_humidity=10;
+	double insulation_furan_concentration=11;
+	int32 insulation_temperature=12;
+	int32 bushings_electrical_loss_tangent=13;
+	int32 hvr_break_voltage=14;
+	int32 magnetic_core_idle_loss=15;
+	double magnetic_core_partial_discharges=16;
+	int32 magnetic_core_vibration=17;
+	int32 cooling_system_efficiency=18;
+	double common_life_time=19;
+	int32 common_temperature=20;
+
+}
+message SendEditedParametersReply {
+	utility.InformationReply information=1;
+}
+
+
+service Monitoring {
+	rpc getParameters(utility.Request) returns(GetParametersReply);
+	rpc sendEditedParameters(SendEditedParametersRequest) returns(SendEditedParametersReply);
+	rpc getParameterValuesPast(utility.Request) returns(getParameterValuesPastReply);
+}

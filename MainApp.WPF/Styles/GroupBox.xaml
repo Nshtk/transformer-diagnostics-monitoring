@@ -1,0 +1,53 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+	<ResourceDictionary.MergedDictionaries>
+		<ResourceDictionary Source="Animation.xaml" />
+	</ResourceDictionary.MergedDictionaries>
+	
+	<Style TargetType="{x:Type GroupBox}">
+		<Setter Property="OverridesDefaultStyle" Value="True" />
+		<Setter Property="SnapsToDevicePixels" Value="True" />
+		<Setter Property="Foreground" Value="Black" />
+		<Setter Property="HeaderTemplate">
+			<Setter.Value>
+				<DataTemplate>
+					<TextBlock Text="{Binding}" FontWeight="SemiBold" FontSize="16"/>
+				</DataTemplate>
+			</Setter.Value>
+		</Setter>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type GroupBox}">
+					<Grid>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="Auto" MinHeight="20"></RowDefinition>
+							<RowDefinition Height="*"></RowDefinition>
+						</Grid.RowDefinitions>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="10"></ColumnDefinition>
+							<ColumnDefinition Width="*"></ColumnDefinition>
+						</Grid.ColumnDefinitions>
+						<Border Grid.Row="0" Grid.Column="1" x:Name="BaseRectangleHead" Background="{StaticResource LightBackground}" CornerRadius="20,5,0,0"></Border>
+						<Border Grid.Row="0" Grid.Column="1" x:Name="GlassRectangleHead" CornerRadius="20,5,0,0">
+							<ContentPresenter ContentSource="Header" RecognizesAccessKey="True" Margin="10,2,2,2"/>
+						</Border>
+						<Border Grid.Row="0" Grid.Column="1" x:Name="GlowRectangleHead" CornerRadius="20,5,0,0" Opacity="0" Background="{StaticResource GlowFX}"></Border>
+						<Border Grid.Row="0" Grid.Column="1" x:Name="ButtonBorderHead" Opacity="1" BorderBrush="Black" BorderThickness="1" CornerRadius="20,5,0,0"></Border>
+
+						<Border Grid.Row="1" Grid.ColumnSpan="3" x:Name="BaseRectangle" Background="{StaticResource LightBackground}" CornerRadius="10,0,10,0"></Border>
+						<!--<Border Grid.Row="1" Grid.ColumnSpan="3" x:Name="GlassRectangle" CornerRadius="10,0,10,0"  Background="{StaticResource GlassFX}"></Border>-->
+						<Border Grid.Row="1" Grid.ColumnSpan="3" x:Name="GlowRectangle" CornerRadius="10,0,10,0" Opacity="0" Background="{StaticResource GlowFX}"></Border>
+						<Border Grid.Row="1" Grid.ColumnSpan="3" x:Name="ButtonBorder" Opacity="1" BorderBrush="Black" BorderThickness="1" CornerRadius="10,0,10,0">
+							<ContentPresenter RecognizesAccessKey="True"  Margin="5"></ContentPresenter>
+						</Border>
+					</Grid>
+					<ControlTemplate.Triggers>
+						<Trigger Property="IsEnabled" Value="false">
+							<Setter Property="Opacity" Value=".5"></Setter>
+						</Trigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+</ResourceDictionary>

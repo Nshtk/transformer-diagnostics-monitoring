@@ -1,0 +1,72 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+	<ResourceDictionary.MergedDictionaries>
+		<ResourceDictionary Source="Animation.xaml" />
+	</ResourceDictionary.MergedDictionaries>
+	
+	<Style TargetType="{x:Type Button}">
+		<Setter Property="OverridesDefaultStyle" Value="True" />
+		<Setter Property="SnapsToDevicePixels" Value="True" />
+		<Setter Property="Foreground" Value="Black" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate x:Name="tmpltButton">
+					<Grid>
+						<Border x:Name="BaseRectangle" 
+                                    Background="{StaticResource LightBackground}" 
+                                    CornerRadius="10,0,10,0">
+						</Border>
+						<Border x:Name="GlowRectangle" 
+                                    Background="{StaticResource GlowFX}" 
+                                    CornerRadius="10,0,10,0" 
+                                    Opacity="0">
+						</Border>
+						<Border x:Name="ButtonBorder" 
+                                    CornerRadius="10,0,10,0" 
+                                    BorderBrush="Black" 
+                                    Opacity="1"  
+                                    BorderThickness="1">
+						</Border>
+						<ContentPresenter x:Name="ButtonContent" 
+                                              Opacity="1" 
+                                              Content="{Binding Path=Content, RelativeSource={RelativeSource TemplatedParent}}" 
+                                              HorizontalAlignment="center" 
+                                              VerticalAlignment="center">
+						</ContentPresenter>
+					</Grid>
+					<ControlTemplate.Triggers>
+						<EventTrigger RoutedEvent="Button.MouseEnter">
+							<EventTrigger.Actions>
+								<BeginStoryboard Storyboard="{StaticResource GlowIn}"></BeginStoryboard>
+							</EventTrigger.Actions>
+						</EventTrigger>
+						<EventTrigger RoutedEvent="Button.MouseLeave">
+							<EventTrigger.Actions>
+								<BeginStoryboard Storyboard="{StaticResource GlowOut}"></BeginStoryboard>
+							</EventTrigger.Actions>
+						</EventTrigger>
+						<EventTrigger RoutedEvent="Button.GotFocus">
+							<EventTrigger.Actions>
+								<BeginStoryboard Storyboard="{StaticResource GlowIn}"></BeginStoryboard>
+							</EventTrigger.Actions>
+						</EventTrigger>
+						<EventTrigger RoutedEvent="Button.LostFocus">
+							<EventTrigger.Actions>
+								<BeginStoryboard Storyboard="{StaticResource GlowOut}"></BeginStoryboard>
+							</EventTrigger.Actions>
+						</EventTrigger>
+						<Trigger Property="Button.IsPressed" Value="True">
+							<Setter Property="Background" TargetName="GlowRectangle" Value="{StaticResource GlowFXPressed}"></Setter>
+							<Setter Property="Opacity" TargetName="ButtonContent" Value="1"></Setter>
+						</Trigger>
+						<Trigger Property="IsEnabled" Value="False">
+							<Setter Property="Opacity" TargetName="ButtonContent" Value=".3"></Setter>
+							<Setter Property="Opacity" TargetName="ButtonBorder" Value=".5"></Setter>
+							<Setter Property="Background" TargetName="BaseRectangle" Value="{StaticResource GlassFXDisabled}"></Setter>
+						</Trigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+</ResourceDictionary>

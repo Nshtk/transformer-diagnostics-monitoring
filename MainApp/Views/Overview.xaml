@@ -1,0 +1,179 @@
+﻿<UserControl x:Class="MainApp.Views.ViewOverview"
+	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+	  xmlns:local="clr-namespace:MainApp.Views"
+	  xmlns:WPF="clr-namespace:MainApp.WPF.MVVM.View;assembly=MainApp.WPF"
+	  mc:Ignorable="d" 
+	  d:DesignHeight="450" d:DesignWidth="800">
+
+	<UserControl.Resources>
+		<WPF:ConverterWidth x:Key="converter_width"/>
+		<Style TargetType="DataGridCell" x:Key="DataGridCell_Parameters">
+			<Setter Property="TextBlock.TextAlignment" Value="Center"/>
+			<Setter Property="VerticalAlignment" Value="Stretch"/>
+		</Style>
+		<Style TargetType="DataGridColumnHeader" x:Key="DataGridColumnHeader_Parameters">
+			<Setter Property="HorizontalContentAlignment" Value="Center"/>
+		</Style>
+	</UserControl.Resources>
+
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="*"/>
+		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition />
+			<ColumnDefinition Width="Auto"/>
+			<ColumnDefinition Width="*"/>
+			<ColumnDefinition Width="Auto"/>
+			<ColumnDefinition Width="*"/>
+		</Grid.ColumnDefinitions>
+
+		<DockPanel Grid.Row="0" Grid.Column="0" LastChildFill="True">
+			<GroupBox Header="Выход за предельные значения">
+				<ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+					<Viewbox Stretch="Uniform" VerticalAlignment="Top">
+						<DataGrid ItemsSource="{Binding Transformer.Parameters_OutOfLimits, Mode=OneWay}" Width="{Binding ActualWidth, Converter={StaticResource converter_width}, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=GroupBox}, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" ColumnHeaderStyle="{StaticResource DataGridColumnHeader_Parameters}" AutoGenerateColumns="False" IsReadOnly="True" HeadersVisibility="Column">
+							<DataGrid.Columns>
+								<DataGridTextColumn Binding="{Binding Name, Mode=OneWay}" Header="Название параметра" MinWidth="150"/>
+								<DataGridTextColumn Binding="{Binding Value, Mode=OneWay}" CellStyle="{StaticResource DataGridCell_Parameters}" Header="Значение" MinWidth="62"/>
+								<DataGridTextColumn Binding="{Binding Limit, Mode=OneWay}" CellStyle="{StaticResource DataGridCell_Parameters}" Header="Предел" Width="*"/>
+							</DataGrid.Columns>
+						</DataGrid>
+					</Viewbox>
+				</ScrollViewer>
+			</GroupBox>
+		</DockPanel>
+		<DockPanel Grid.Row="2" Grid.Column="0" LastChildFill="True">
+			<GroupBox Header="{Binding OilQuality.Name}">
+				<ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+					<Viewbox Stretch="Uniform" VerticalAlignment="Top">
+						<DataGrid ItemsSource="{Binding OilQuality.Parameters, Mode=OneWay}" Width="{Binding ActualWidth, Converter={StaticResource converter_width}, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=GroupBox}, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" ColumnHeaderStyle="{StaticResource DataGridColumnHeader_Parameters}" AutoGenerateColumns="False" HeadersVisibility="Column">
+							<DataGrid.Columns>
+								<DataGridTextColumn Binding="{Binding Name, Mode=OneWay}" Header="Название параметра" MinWidth="150"/>
+								<DataGridTextColumn Binding="{Binding Value, Mode=TwoWay}" CellStyle="{StaticResource DataGridCell_Parameters}" Header="Значение" MinWidth="62"/>
+								<DataGridTextColumn Binding="{Binding Description, Mode=OneWay}" Header="Описание" Width="*"/>
+							</DataGrid.Columns>
+						</DataGrid>
+					</Viewbox>
+				</ScrollViewer>
+			</GroupBox>
+		</DockPanel>
+		<DockPanel Grid.Row="4" Grid.Column="0" LastChildFill="True">
+			<GroupBox Header="{Binding Windings.Name}">
+				<ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+					<Viewbox Stretch="Uniform" VerticalAlignment="Top">
+						<DataGrid ItemsSource="{Binding Windings.Parameters, Mode=OneWay}" Width="{Binding ActualWidth, Converter={StaticResource converter_width}, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=GroupBox}, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" ColumnHeaderStyle="{StaticResource DataGridColumnHeader_Parameters}" AutoGenerateColumns="False" HeadersVisibility="Column">
+							<DataGrid.Columns>
+								<DataGridTextColumn Binding="{Binding Name, Mode=OneWay}" Header="Название параметра" MinWidth="150"/>
+								<DataGridTextColumn Binding="{Binding Value, Mode=TwoWay}" CellStyle="{StaticResource DataGridCell_Parameters}" Header="Значение" MinWidth="62"/>
+								<DataGridTextColumn Binding="{Binding Description, Mode=OneWay}" Header="Описание" Width="*"/>
+							</DataGrid.Columns>
+						</DataGrid>
+					</Viewbox>
+				</ScrollViewer>
+			</GroupBox>
+		</DockPanel>
+		<DockPanel Grid.Row="0" Grid.Column="2" LastChildFill="True">
+			<GroupBox Header="{Binding Insulation.Name}">
+				<ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+					<Viewbox Stretch="Uniform" VerticalAlignment="Top">
+						<DataGrid ItemsSource="{Binding Insulation.Parameters, Mode=OneWay}" Width="{Binding ActualWidth, Converter={StaticResource converter_width}, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=GroupBox}, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" ColumnHeaderStyle="{StaticResource DataGridColumnHeader_Parameters}" AutoGenerateColumns="False" HeadersVisibility="Column">
+							<DataGrid.Columns>
+								<DataGridTextColumn Binding="{Binding Name, Mode=OneWay}" Header="Название параметра" MinWidth="150"/>
+								<DataGridTextColumn Binding="{Binding Value, Mode=TwoWay}" CellStyle="{StaticResource DataGridCell_Parameters}" Header="Значение" MinWidth="62"/>
+								<DataGridTextColumn Binding="{Binding Description, Mode=OneWay}" Header="Описание" Width="*"/>
+							</DataGrid.Columns>
+						</DataGrid>
+					</Viewbox>
+				</ScrollViewer>
+			</GroupBox>
+		</DockPanel>
+		<DockPanel Grid.Row="2" Grid.Column="2" LastChildFill="True">
+			<GroupBox Header="{Binding Bushings.Name}">
+				<ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+					<Viewbox Stretch="Uniform" VerticalAlignment="Top">
+						<DataGrid ItemsSource="{Binding Bushings.Parameters, Mode=OneWay}" Width="{Binding ActualWidth, Converter={StaticResource converter_width}, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=GroupBox}, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" ColumnHeaderStyle="{StaticResource DataGridColumnHeader_Parameters}" AutoGenerateColumns="False" HeadersVisibility="Column">
+							<DataGrid.Columns>
+								<DataGridTextColumn Binding="{Binding Name, Mode=OneWay}" Header="Название параметра" MinWidth="150"/>
+								<DataGridTextColumn Binding="{Binding Value, Mode=TwoWay}" CellStyle="{StaticResource DataGridCell_Parameters}" Header="Значение" MinWidth="62"/>
+								<DataGridTextColumn Binding="{Binding Description, Mode=OneWay}" Header="Описание" Width="*"/>
+							</DataGrid.Columns>
+						</DataGrid>
+					</Viewbox>
+				</ScrollViewer>
+			</GroupBox>
+		</DockPanel>
+		<DockPanel Grid.Row="4" Grid.Column="2" LastChildFill="True">
+			<GroupBox Header="{Binding HVR.Name}">
+				<ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+					<Viewbox Stretch="Uniform" VerticalAlignment="Top">
+						<DataGrid ItemsSource="{Binding HVR.Parameters, Mode=OneWay}" Width="{Binding ActualWidth, Converter={StaticResource converter_width}, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=GroupBox}, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" ColumnHeaderStyle="{StaticResource DataGridColumnHeader_Parameters}" AutoGenerateColumns="False" HeadersVisibility="Column">
+							<DataGrid.Columns>
+								<DataGridTextColumn Binding="{Binding Name, Mode=OneWay}" Header="Название параметра" MinWidth="150"/>
+								<DataGridTextColumn Binding="{Binding Value, Mode=TwoWay}" CellStyle="{StaticResource DataGridCell_Parameters}" Header="Значение" MinWidth="62"/>
+								<DataGridTextColumn Binding="{Binding Description, Mode=OneWay}" Header="Описание" Width="*"/>
+							</DataGrid.Columns>
+						</DataGrid>
+					</Viewbox>
+				</ScrollViewer>
+			</GroupBox>
+		</DockPanel>
+		<DockPanel Grid.Row="0" Grid.Column="4" LastChildFill="True">
+			<GroupBox Header="{Binding MagneticCore.Name}">
+				<ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+					<Viewbox Stretch="Uniform" VerticalAlignment="Top">
+						<DataGrid ItemsSource="{Binding MagneticCore.Parameters, Mode=OneWay}" Width="{Binding ActualWidth, Converter={StaticResource converter_width}, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=GroupBox}, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" ColumnHeaderStyle="{StaticResource DataGridColumnHeader_Parameters}" AutoGenerateColumns="False" HeadersVisibility="Column">
+							<DataGrid.Columns>
+								<DataGridTextColumn Binding="{Binding Name, Mode=OneWay}" Header="Название параметра" MinWidth="150"/>
+								<DataGridTextColumn Binding="{Binding Value, Mode=TwoWay}" CellStyle="{StaticResource DataGridCell_Parameters}" Header="Значение" MinWidth="62"/>
+								<DataGridTextColumn Binding="{Binding Description, Mode=OneWay}" Header="Описание" Width="*"/>
+							</DataGrid.Columns>
+						</DataGrid>
+					</Viewbox>
+				</ScrollViewer>
+			</GroupBox>
+		</DockPanel>
+		<DockPanel Grid.Row="2" Grid.Column="4" LastChildFill="True">
+			<GroupBox Header="{Binding Cooling.Name}">
+				<ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+					<Viewbox Stretch="Uniform" VerticalAlignment="Top">
+						<DataGrid ItemsSource="{Binding Cooling.Parameters, Mode=OneWay}" Width="{Binding ActualWidth, Converter={StaticResource converter_width}, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=GroupBox}, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" ColumnHeaderStyle="{StaticResource DataGridColumnHeader_Parameters}" AutoGenerateColumns="False" HeadersVisibility="Column">
+							<DataGrid.Columns>
+								<DataGridTextColumn Binding="{Binding Name, Mode=OneWay}" Header="Название параметра" MinWidth="150"/>
+								<DataGridTextColumn Binding="{Binding Value, Mode=TwoWay}" CellStyle="{StaticResource DataGridCell_Parameters}" Header="Значение" MinWidth="62"/>
+								<DataGridTextColumn Binding="{Binding Description, Mode=OneWay}" Header="Описание" Width="*"/>
+							</DataGrid.Columns>
+						</DataGrid>
+					</Viewbox>
+				</ScrollViewer>
+			</GroupBox>
+		</DockPanel>
+		<DockPanel Grid.Row="4" Grid.Column="4" LastChildFill="True">
+			<GroupBox Header="{Binding GeneralState.Name}">
+				<ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+					<Viewbox Stretch="Uniform" VerticalAlignment="Top">
+						<DataGrid ItemsSource="{Binding GeneralState.Parameters, Mode=OneWay}" Width="{Binding ActualWidth, Converter={StaticResource converter_width}, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=GroupBox}, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" ColumnHeaderStyle="{StaticResource DataGridColumnHeader_Parameters}" AutoGenerateColumns="False" HeadersVisibility="Column">
+							<DataGrid.Columns>
+								<DataGridTextColumn Binding="{Binding Name, Mode=OneWay}" Header="Название параметра" MinWidth="150"/>
+								<DataGridTextColumn Binding="{Binding Value, Mode=TwoWay}" CellStyle="{StaticResource DataGridCell_Parameters}" Header="Значение" MinWidth="62"/>
+								<DataGridTextColumn Binding="{Binding Description, Mode=OneWay}" Header="Описание" Width="*"/>
+							</DataGrid.Columns>
+						</DataGrid>
+					</Viewbox>
+				</ScrollViewer>
+			</GroupBox>
+		</DockPanel>
+
+		<GridSplitter Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5" Height="3" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
+		<GridSplitter Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="5" Height="3" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
+		<GridSplitter Grid.Row="0" Grid.Column="1" Grid.RowSpan="5" Width="3" HorizontalAlignment="Center" VerticalAlignment="Stretch"/>
+		<GridSplitter Grid.Row="0" Grid.Column="3" Grid.RowSpan="5" Width="3" HorizontalAlignment="Center" VerticalAlignment="Stretch"/>
+	</Grid>
+</UserControl>

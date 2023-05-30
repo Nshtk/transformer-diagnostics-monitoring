@@ -1,0 +1,40 @@
+syntax="proto3";
+option csharp_namespace="Proto.Common";
+
+import "google/protobuf/timestamp.proto";
+import "Utility.proto";
+
+package common;
+
+message TransformerData {
+	int64 id=1;
+	string name=2;
+	string location=3;
+	string status=4;
+	google.protobuf.Timestamp last_condition_check=5;
+}
+
+message TransformersDataReply {
+	utility.InformationReply information=1;
+	repeated TransformerData transformers_data=2;
+}
+
+message DocumentationRequest {
+	uint32 id=1;
+	uint32 id_documentation=2;
+}
+message DocumentationReply {
+	utility.InformationReply information=1;
+	bytes documentation_content=2;
+}
+
+message EnableMonitoringReply {
+	utility.InformationReply information=1;
+	bool is_enabled=2;
+}
+
+service Common {
+	rpc getTransformersData(utility.Request) returns(TransformersDataReply);
+	rpc getDocumentation(DocumentationRequest) returns(DocumentationReply);
+	rpc enableMonitoring(utility.Request) returns(EnableMonitoringReply);
+}

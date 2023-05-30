@@ -1,0 +1,53 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Google.Protobuf" Version="3.22.1" />
+    <PackageReference Include="Grpc.Core" Version="2.46.6" />
+    <PackageReference Include="Grpc.Net.Client" Version="2.52.0" />
+    <PackageReference Include="Grpc.Tools" Version="2.53.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="MailKit" Version="4.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MainApp.Proto\MainApp.Proto.csproj" />
+  </ItemGroup>
+
+	<ItemGroup>
+		<Protobuf Include="..\MainApp.Proto\Protos\ClientServer\Common.proto" GrpcServices="Client" ProtoRoot="..\MainApp.Proto\Protos\">
+			<Link>Protos\ClientServer\Common.proto</Link>
+		</Protobuf>
+		<Protobuf Include="..\MainApp.Proto\Protos\ClientServer\Connection.proto" GrpcServices="Client" ProtoRoot="..\MainApp.Proto\Protos\">
+			<Link>Protos\ClientServer\Connection.proto</Link>
+		</Protobuf>
+		<Protobuf Include="..\MainApp.Proto\Protos\ClientServer\Monitoring.proto" GrpcServices="Client" ProtoRoot="..\MainApp.Proto\Protos\">
+			<Link>Protos\ClientServer\Monitoring.proto</Link>
+		</Protobuf>
+
+		<Protobuf Include="..\MainApp.Proto\Protos\ServerMediator\Db\Diagnostics.proto" GrpcServices="Client" ProtoRoot="..\MainApp.Proto\Protos\">
+			<Link>Protos\ServerMediator\Db\Diagnostics.proto</Link>
+		</Protobuf>
+		<Protobuf Include="..\MainApp.Proto\Protos\ServerMediator\Db\Expert.proto" GrpcServices="Client" ProtoRoot="..\MainApp.Proto\Protos\">
+			<Link>Protos\ServerMediator\Db\Expert.proto</Link>
+		</Protobuf>
+		<Protobuf Include="..\MainApp.Proto\Protos\ServerMediator\Db\Monitoring.proto" GrpcServices="Client" ProtoRoot="..\MainApp.Proto\Protos\">
+			<Link>Protos\ServerMediator\Db\Monitoring.proto</Link>
+		</Protobuf>
+		
+		<Protobuf Include="..\MainApp.Proto\Protos\ServerMediator\DbUtility.proto" ProtoRoot="..\MainApp.Proto\Protos\">
+			<Link>Protos\ServerMediator\DbUtility.proto</Link>
+		</Protobuf>
+		<Protobuf Include="..\MainApp.Proto\Protos\Utility.proto" ProtoRoot="..\MainApp.Proto\Protos\">
+			<Link>Protos\Utility.proto</Link>
+		</Protobuf>
+	</ItemGroup>
+
+</Project>

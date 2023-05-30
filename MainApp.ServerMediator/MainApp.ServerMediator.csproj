@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Grpc.AspNetCore" Version="2.52.0" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.3" />
+  </ItemGroup>
+
+	<ItemGroup>
+		<Protobuf Include="..\MainApp.Proto\Protos\ServerMediator\Db\Diagnostics.proto" GrpcServices="Server" ProtoRoot="..\MainApp.Proto\Protos\">
+			<Link>Protos\ServerMediator\Db\Diagnostics.proto</Link>
+		</Protobuf>
+		<Protobuf Include="..\MainApp.Proto\Protos\ServerMediator\Db\Expert.proto" GrpcServices="Server" ProtoRoot="..\MainApp.Proto\Protos\">
+			<Link>Protos\ServerMediator\Db\Expert.proto</Link>
+		</Protobuf>
+		<Protobuf Include="..\MainApp.Proto\Protos\ServerMediator\Db\Monitoring.proto" GrpcServices="Server" ProtoRoot="..\MainApp.Proto\Protos\">
+			<Link>Protos\ServerMediator\Db\Monitoring.proto</Link>
+		</Protobuf>
+		
+		<Protobuf Include="..\MainApp.Proto\Protos\ServerMediator\DbUtility.proto" ProtoRoot="..\MainApp.Proto\Protos\">
+			<Link>Protos\ServerMediator\DbUtility.proto</Link>
+		</Protobuf>
+		<Protobuf Include="..\MainApp.Proto\Protos\Utility.proto" ProtoRoot="..\MainApp.Proto\Protos\">
+			<Link>Protos\Utility.proto</Link>
+		</Protobuf>
+	</ItemGroup>
+</Project>

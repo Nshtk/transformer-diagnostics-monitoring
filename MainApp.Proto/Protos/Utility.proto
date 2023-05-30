@@ -1,0 +1,24 @@
+syntax="proto3";
+option csharp_namespace="Proto";
+
+package utility;
+
+message Request {
+	uint32 id=1;
+}
+
+message InformationReply {
+	enum Message_Type{
+		ORDINARY=0;
+		WARNING=1;
+		CRITICAL=2;
+	}
+	bool result=1;
+	string details=2;
+	Message_Type type=3;
+}
+
+message ServerObject {
+	uint32 id=1;
+	string name=2;
+}

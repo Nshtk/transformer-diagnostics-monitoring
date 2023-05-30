@@ -1,0 +1,41 @@
+syntax="proto3";
+
+import "Utility.proto";
+import "ServerMediator/DbUtility.proto";
+
+option csharp_namespace="Proto.ServerMediator.Db.Monitoring";
+package monitoring;
+
+message Building {
+	int64 id=1;
+	string name=2;
+}
+message Room {
+	int64 id=1;
+	Building building=2;
+	string name=3;
+}
+message Transformer {
+	int64 id=1;
+	Room room=2;
+	bool is_functioning=3;
+	bool is_monitored=4;
+}
+message Sensor {
+	int64 id=1;
+	string name=2;
+	string type=3;
+}
+message Sensor_Transformer {
+	Sensor id=1;
+	Transformer transformer=2;
+	bool is_functioning=3;
+	double value=4;
+}
+
+service DbMonitoring {
+	rpc selectFromDatabase(db_utility.SelectRequest) returns(db_utility.SelectReply);
+	rpc insertToDatabase(db_utility.InsertRequest) returns(utility.InformationReply);
+	rpc updateInDatabase(db_utility.UpdateRequest) returns(utility.InformationReply);
+	rpc deleteFromDatabase(db_utility.DeleteRequest) returns(utility.InformationReply);
+}

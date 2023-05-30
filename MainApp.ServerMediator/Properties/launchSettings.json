@@ -1,0 +1,13 @@
+﻿{
+  "profiles": {
+    "MainApp.ServerMediator": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "launchBrowser": false,
+      "applicationUrl": "http://localhost:5161;https://localhost:7294",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}

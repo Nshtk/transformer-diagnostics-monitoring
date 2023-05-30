@@ -1,0 +1,61 @@
+syntax="proto3";
+
+import "google/protobuf/timestamp.proto";
+import "Utility.proto";
+import "ServerMediator/DbUtility.proto";
+
+option csharp_namespace="Proto.ServerMediator.Db.Diagnostics";
+package diagnostics;
+
+enum Table {
+  PLAYER=0;
+  PLAYERINFO=1;
+  PLAYERBLOCKLIST=2;
+  PLAYER_SECURITYQUESTION=3;
+  SECURITYQUESTION=4;
+}
+
+enum Field {
+  ID=0;
+  LOGIN=1;
+  PASSWORD=2;
+  REGISTRATION_DATE=3;
+  LOGIN_TIMESTAMP=4;
+  LOGIN_LAST_DATETIME=5;
+  BLOCK_DATETIME_BEGIN=6;
+  BLOCK_DATETIME_END=7;
+  SECURITY_ANSWER=8;
+  QUESTION=9;
+}
+
+message Transformer {
+	int64 id=1;
+	string status=2;
+	string description=3;
+	int32 state_score=4;
+	google.protobuf.Timestamp next_maintenance=5;
+}
+message Element {
+	int64 id=1;
+}
+message Defect {
+	int64 id=1;
+}
+message Transformer_Element {
+	Transformer transformer=1;
+	Element element=2;
+	int32 state_score=3;
+}
+message Transformer_Element_Defect {
+	int64 id=1;
+	Transformer_Element transformer_element=2;
+	string status=3;
+	string description=4;
+}
+
+service DbDiagnostics {
+	rpc selectFromDatabase(db_utility.SelectRequest) returns(db_utility.SelectReply);
+	rpc insertToDatabase(db_utility.InsertRequest) returns(utility.InformationReply);
+	rpc updateInDatabase(db_utility.UpdateRequest) returns(utility.InformationReply);
+	rpc deleteFromDatabase(db_utility.DeleteRequest) returns(utility.InformationReply);
+}

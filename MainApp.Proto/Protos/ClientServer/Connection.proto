@@ -1,0 +1,26 @@
+syntax="proto3";
+option csharp_namespace="Proto.Connection";
+
+import "Utility.proto";
+
+package connection;
+
+message AuthorizeUserRequest {
+	string user_name=1;
+}
+message AuthorizeUserReply {
+	uint32 id=1;
+	utility.InformationReply information=2;
+}
+
+message KeepConnectionRequest {
+	uint32 id=1;
+}
+message KeepConnectionReply {
+	utility.InformationReply information=1;
+}
+
+service Connection {
+	rpc authorizeUser(AuthorizeUserRequest) returns(AuthorizeUserReply);
+	rpc keepConnection(KeepConnectionRequest) returns(KeepConnectionReply);
+}
